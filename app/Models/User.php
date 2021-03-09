@@ -53,7 +53,11 @@ class User extends Authenticatable
 
     public function timeline()
     {
-        return \App\Models\Tweet::where('user_id', $this->id)->latest()->get();
+        //return \App\Models\Tweet::where('user_id', $this->id)->latest()->get();
+        $ids = $this->follows()->pluck('id');
+        $ids->push($this->id);
+        return \App\Models\Tweet::whereIn('user_id', $ids)->latest()->get();
+
     }
 
     public function follow(User $user)
