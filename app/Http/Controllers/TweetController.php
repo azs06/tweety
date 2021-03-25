@@ -11,7 +11,7 @@ class TweetController extends Controller
     public function index()
     {
         //ddd(auth()->user()->tweets);
-        return view('home', [
+        return view('tweets.index', [
             'tweets' => auth()->user()->timeline()
         ]);
     }

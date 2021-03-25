@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Followable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -9,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, Followable;
 
     /**
      * The attributes that are mass assignable.
@@ -43,7 +44,7 @@ class User extends Authenticatable
 
     public function getAvatar()
     {
-        return "https://i.pravatar.cc/50?u=$this->email";
+        return "https://i.pravatar.cc/200?u=$this->email";
     }
 
     public function tweets()
@@ -59,14 +60,17 @@ class User extends Authenticatable
         return \App\Models\Tweet::whereIn('user_id', $ids)->latest()->get();
 
     }
+    
+    /* overriding default route model binding */
 
-    public function follow(User $user)
+    public function getRouteKeyName()
     {
-        return $this->follows()->save($user);
+        return 'name';
     }
 
-    public function follows()
+    public function path()
     {
-        return $this->belongsToMany(User::class, 'follows', 'user_id', 'following_user_id')->withTimestamps();
+        return route('profile', $this->name);
     }
+
 }
