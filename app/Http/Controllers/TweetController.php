@@ -26,7 +26,7 @@ class TweetController extends Controller
             'user_id' => auth()->id(),
             'body' => $validated['body']
         ]);
-        return redirect('/home');
+        return redirect()->route('home');
     }
 
     public function update()
