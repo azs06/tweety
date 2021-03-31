@@ -16,7 +16,7 @@
 
             </div>
 
-            <img src={{$user->getAvatar()}} class="rounded-full mr-2 absolute" style="bottom: 120px; width: 150px; left: calc(50% - 75px);" alt="">  
+            <img src={{ $user->avatar }} class="rounded-full mr-2 absolute" style="bottom: 120px; width: 150px; left: calc(50% - 75px);" alt="">  
 
         </div>
         <p class="text-sm">
