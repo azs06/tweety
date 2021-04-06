@@ -46,6 +46,9 @@ class User extends Authenticatable
 
     public function getAvatarAttribute($value)
     {
+        if(!$value){
+            return 'https://picsum.photos/id/870/200/300?grayscale&blur=2';
+        }
         return asset($value);
     }
 
@@ -58,12 +61,16 @@ class User extends Authenticatable
         return $this->hasMany(\App\Models\Tweet::class);
     }
 
+    public function likes(){
+        return $this->hasMany(\App\Models\Like::class);
+    }
+
     public function timeline()
     {
         //return \App\Models\Tweet::where('user_id', $this->id)->latest()->get();
         $ids = $this->follows()->pluck('id');
         $ids->push($this->id);
-        return \App\Models\Tweet::whereIn('user_id', $ids)->latest()->get();
+        return \App\Models\Tweet::whereIn('user_id', $ids)->withLikes()->latest()->paginate(50);
 
     }
     

@@ -1,9 +1,9 @@
 <x-app>
     <header class="mb-6 relative">
         <img class="mb-2" src="/images/bugs-bunny.jpg" alt="">
-        <div class="flex justify-between item-center mb-4">
+        <div class="flex justify-between items-baseline mb-4">
 
-            <div>
+            <div style="max-width: 250px">
                 <h2 class="font-bold text-xl">{{$user->name}}</h2>
                 <p class="text-sm">Joined {{ $user->created_at->diffForHumans() }}</p>
             </div>
@@ -16,7 +16,7 @@
 
             </div>
 
-            <img src={{ $user->avatar }} class="rounded-full mr-2 absolute" style="bottom: 120px; width: 150px; left: calc(50% - 75px);" alt="">  
+            <img src={{ $user->avatar }} class="rounded-full mr-2 absolute" style="bottom: 120px; width: 150px; height: 150px; left: calc(50% - 75px);" alt="">  
 
         </div>
         <p class="text-sm">
@@ -25,5 +25,7 @@
             dolorem perspiciatis hic aspernatur eligendi. Voluptatibus, accusamus?
         </p>
     </header> 
-    @include('_timeline', ['tweets' => $user->tweets]) 
+    @include('_timeline', [
+        'tweets' => $tweets
+    ]) 
 </x-app>

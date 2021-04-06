@@ -3,8 +3,8 @@
 <ul>
     @forelse(auth()->user()->follows as $user)
     <li class="mb-4">
-        <a class="flex item-center" href="{{ route('profile', $user) }}">
-            <img src="https://i.pravatar.cc/50?u={{$user->email}}" class="rounded-full mr-2" alt="">
+        <a class="flex item-center flex-shrink-0" href="{{ route('profile', $user) }}">
+            <img width="60px" height="60px" style="border-radius: 100%; width: 60px; height: 60px;" src="{{$user->avatar}}" class="mr-2" alt="">
             <span class="text-small">{{$user->name}}</span>
         </a>
     </li>
