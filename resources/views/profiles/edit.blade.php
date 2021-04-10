@@ -42,6 +42,15 @@
             @enderror
         </div>
         <div class="flex items-baseline mb-4 input-block">
+            <label class="w-20"  for="description">Description</label>
+            <textarea name="description" class="border-2 w-full p-1 ml-2 @error('description') is-invalid @enderror">{{$user->description}}</textarea>    
+            @error('description')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+        </div>
+        <div class="flex items-baseline mb-4 input-block">
             <label class="w-20"  for="">Password</label>
             <input name="password" class="border-2 w-full p-1 ml-2 @error('password') is-invalid @enderror" required type="password">
             @error('password')

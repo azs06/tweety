@@ -24,20 +24,22 @@ class ProfilesController extends Controller
 
        // $this->authorize('edit', $user);
 
+       //ddd($user->description);
+
         return view('profiles.edit', compact('user'));
     }
 
     public function update(User $user){
-
         $attributes = request()->validate([
             'username' => ['required', 'string', 'max:255','alpha_dash', Rule::unique('users')->ignore($user)],
             'name' => ['required', 'string', 'max:255'],
             'avatar' => ['file'],
+            'description' => ['max:1000'],
+            'banner' => ['file'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user)],
             'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
         ]);
-        
-        if($attributes['avatar']){
+        if(array_key_exists('avatar', $attributes)){
             $attributes['avatar'] = request('avatar')->store('avatars');
         }
 
