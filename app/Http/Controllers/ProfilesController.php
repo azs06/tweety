@@ -37,10 +37,13 @@ class ProfilesController extends Controller
             'description' => ['max:1000'],
             'banner' => ['file'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user)],
-            'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
+            'password' => ['sometimes','required', 'string', 'min:8', 'max:255', 'confirmed'],
         ]);
         if(array_key_exists('avatar', $attributes)){
             $attributes['avatar'] = request('avatar')->store('avatars');
+        }
+        if(array_key_exists('banner', $attributes)){
+            $attributes['banner'] = request('banner')->store('banners');
         }
 
         $user->update($attributes);

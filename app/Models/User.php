@@ -54,6 +54,14 @@ class User extends Authenticatable
         return asset($value);
     }
 
+    public function getBannerAttribute($value)
+    {
+        if(!$value){
+            return '/images/bugs-bunny.jpg';
+        }
+        return asset($value);
+    }
+
     public function setPasswordAttribute($value){
         $this->attributes['password'] = bcrypt($value);
     }

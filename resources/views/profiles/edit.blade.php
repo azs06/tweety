@@ -33,6 +33,18 @@
              @enderror
         </div>
         <div class="flex items-baseline mb-4 input-block">
+            <label class="w-20" for="">Banner</label>
+            <input type="file" class="border-2 w-full p-1 ml-2 @error('avatar') is-invalid @enderror" name="banner" id="">
+            <div style="margin-top: auto">
+                <img style="width: auto; height: 40px;" src="{{$user->banner}}" alt="">
+            </div>
+            @error('banner')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+             @enderror
+        </div>
+        <div class="flex items-baseline mb-4 input-block">
             <label class="w-20"  for="">Email</label>
             <input name="email" class="border-2 w-full p-1 ml-2 @error('email') is-invalid @enderror"  value="{{$user->email}}" type="email">
             @error('email')

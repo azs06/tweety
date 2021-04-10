@@ -1,6 +1,6 @@
 <x-app>
     <header class="mb-6 relative">
-        <img class="mb-2" src="/images/bugs-bunny.jpg" alt="">
+        <img class="mb-2" src="{{$user->banner}}" alt="">
         <div class="flex justify-between items-baseline mb-4">
 
             <div style="max-width: 250px">
@@ -20,9 +20,7 @@
 
         </div>
         <p class="text-sm">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus corporis obcaecati animi. Rem ipsum, ipsa quos ut illo pariatur accusamus sapiente incidunt illum quisquam vel aliquam facere, quaerat, 
-            blanditiis facilis.Rerum quo nam aperiam reprehenderit necessitatibus, culpa cumque, alias quos nesciunt recusandae deleniti unde natus officia tempore dignissimos atque maxime molestiae labore harum 
-            dolorem perspiciatis hic aspernatur eligendi. Voluptatibus, accusamus?
+            {{$user->description}}
         </p>
     </header> 
     @include('_timeline', [
