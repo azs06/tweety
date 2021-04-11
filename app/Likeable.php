@@ -24,6 +24,14 @@ trait Likeable{
         ]);
     }
 
+    public function removeLike($user = null)
+    {
+        $this->likes()->update([
+            'user_id' => $user ? $user->id : auth()->id,
+            'liked' => null
+        ]);
+    }
+
     public function dislike($user = null){
         $this->like($user, false);
     }
