@@ -18,7 +18,7 @@ trait Likeable{
 
     public function like($user = null, $liked = true){
         $this->likes()->updateOrCreate([
-            'user_id' => $user ? $user->id : auth()->id
+            'user_id' => $user ? $user->id : auth()->user()->id
         ],[
             'liked' => $liked,
         ]);
@@ -27,7 +27,7 @@ trait Likeable{
     public function removeLike($user = null)
     {
         $this->likes()->update([
-            'user_id' => $user ? $user->id : auth()->id,
+            'user_id' => $user ? $user->id : auth()->user()->id,
             'liked' => null
         ]);
     }
@@ -41,7 +41,8 @@ trait Likeable{
     }
 
     public function isDisLikedBy(User $user){
-        return !$this->isLikedBy($user);
+        $isNull = (bool)$user->likes->where('tweet_id', $this->id)->whereNull('liked')->count();
+        return $isNull ? false : (bool)$user->likes->where('tweet_id', $this->id)->where('liked', false)->count();
     }
 
     public function likes(){
