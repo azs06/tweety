@@ -42,7 +42,7 @@ trait Likeable{
 
     public function isDisLikedBy(User $user){
         $isNull = (bool)$user->likes->where('tweet_id', $this->id)->whereNull('liked')->count();
-        return $isNull ? false : (bool)$user->likes->where('tweet_id', $this->id)->where('liked', false)->count();
+        return $isNull ? false : !$this->isLikedBy($user);
     }
 
     public function likes(){
